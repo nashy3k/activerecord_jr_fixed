@@ -22,12 +22,45 @@ case test
 	birthday = Date.today - rand(15..40)*365
 	gender = ['m', 'f'].sample
 	noob = Student.create(first_name: fname, last_name: lname, email: email, birthdate: birthday, gender: gender, cohort_id: 'Delta')
-	#puts Student.where('first_name = ?', fname)
 
 	when "New cohort"
 	puts "New cohort:"
 	cname = gets.chomp
 	newcohort = Cohort.create(name: cname)
+
+	when "List all"
+		puts "student or cohort"
+		table = gets.chomp
+		case table
+			when 'student'
+				puts Student.all
+			when 'cohort'
+				puts Cohort.all
+		end
+
+	when "Where"
+		puts "student or cohort"
+		table = gets.chomp
+		puts "name:"
+		name = gets.chomp
+		case table
+			when 'student'
+				puts Student.where('first_name = ?', name)
+			when 'cohort'
+				puts Cohort.where('name = ?', name)
+		end
+
+	when "Find"
+			puts "student or cohort"
+			table = gets.chomp
+			puts "id:"
+			id = gets.chomp
+			case table
+				when 'student'
+					puts Student.find(id)
+				when 'cohort'
+					puts Cohort.find(id)
+			end
 
 	else
 	puts "Nothing"
